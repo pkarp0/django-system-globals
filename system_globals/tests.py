@@ -18,6 +18,11 @@ class SystemGlobalTest(TestCase):
         self.sg2.delete()
         self.sg3.delete()
 
+    def test_create_with_set(self):
+        self.assertTrue(len(SystemGlobal.objects.all()), 3)
+        SystemGlobal.objects.set('myKey', 'myValue')
+        self.assertEqual(len(SystemGlobal.objects.all()), 4)
+
     def test_as_dict_with_prefix(self):
         dictionary = SystemGlobal.objects.as_dict(prefix='testing_')
         self.assertTrue('one' in dictionary)
